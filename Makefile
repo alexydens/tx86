@@ -6,20 +6,19 @@ OBJ_DIR=obj
 BIN_DIR=bin
 ISO_DIR=iso
 
-CC=clang -target x86_64-unknown-none
-AS=clang -target x86_64-unknown-none
+CC=clang -target x86_64-unknown-elf
+AS=clang -target x86_64-unknown-elf
 LD=ld.lld
 
 CFLAGS = -std=c11 -Wall -Wextra -Wpedantic -Werror
 CFLAGS += -nostdinc
-CFLAGS += -O0
 CFLAGS += -ffreestanding -fno-PIC -fno-lto
 CFLAGS += -fno-stack-check -fno-stack-protector
 CFLAGS += -I$(INC_DIR)
-CFLAGS += -mcmodel=kernel -mno-red-zone
+CFLAGS += -mno-red-zone
+#CFLAGS += -mcmodel=kernel -mno-red-zone
 
 LDFLAGS = -nostdlib -static -z max-page-size=0x1000
-LDFLAGS += -O0
 LDFLAGS += -T $(CONF_DIR)/linker.ld
 LDFLAGS += -m elf_x86_64
 

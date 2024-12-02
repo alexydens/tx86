@@ -1,6 +1,10 @@
+/* Includes */
+#include <core/base.h>
+#include <x86/port.h>
+
+/* Kernel entry point */
 void kmain(void) {
-  unsigned short port = 0x3f8;
-  unsigned char val = 'A';
-  __asm__ __volatile__ ("outb %b0,%w1" :: "a"(val), "Nd" (port));
+  port_outb(0x3f8, 'A');
+
   while (1) __asm__ __volatile__ ("cli; hlt");
 }
